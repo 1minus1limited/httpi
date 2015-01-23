@@ -113,7 +113,7 @@ module HTTPI
         auth_response = respond_with(requester.call(http, request_client(:head)))
 
         # build an authentication request based on the token provided by the server
-        if auth_response.headers["WWW-Authenticate"] =~ /(NTLM|Negotiate) (.+)/
+        if auth_response.headers["WWW-Authenticate"].first =~ /(NTLM|Negotiate) (.+)/
           auth_token = $2
           ntlm_message = Net::NTLM::Message.decode64(auth_token)
 
